@@ -32,10 +32,15 @@ const App = () => {
     );
   }
 
-  let expenses_list = <p>No Expense Found</p>;
-  // if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
-  //   return <p>No Expense Found</p>;
-  // }
+  if (error) {
+    return <p className="centered focused">{error}</p>;
+  }
+
+  let expenses_list;
+
+  if (status === "completed" && (!loadedExpenses || loadedExpenses.length === 0)) {
+    expenses_list=<p className="centered focused">No Expense Found!!</p>;
+  }
   if (status === "completed" && loadedExpenses && loadedExpenses.length > 0) {
     expenses_list = <Expenses items={loadedExpenses} />;
   }
@@ -43,7 +48,6 @@ const App = () => {
   return (
     <div>
       <NewExpense onAddExpense={onAddExpenseHandler} />
-      {/* <Expenses items={expenses} /> */}
       {expenses_list}
     </div>
   );
